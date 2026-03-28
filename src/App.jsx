@@ -11,7 +11,7 @@ const PRICE_YEAR  = (import.meta.env?.VITE_STRIPE_YEARLY_PRICE_ID  as string) ||
 // Pricing
 const PLANS = {
   weekly: { id: "weekly", label: "Weekly",  price: 2.99,  period: "week",  trialDays: 1, priceId: PRICE_WEEK, perMonth: 12.96 },
-  yearly: { id: "yearly", label: "Annual",  price: 21.99, period: "year",  trialDays: 1, priceId: PRICE_YEAR, perMonth: 1.83, savings: "40%" },
+  yearly: { id: "yearly", label: "Annual",  price: 89.99, period: "year",  trialDays: 1, priceId: PRICE_YEAR, perMonth: 7.49, savings: "42%" },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1108,7 +1108,7 @@ export default function FridgeCook() {
             <div className="plan-card active">
               <span className="plan-badge pro">✦ Pro {sub.status === "trial" ? "— Trial" : "— Active"}</span>
               <div className="plan-name">FridgeCook Pro</div>
-              <div className="plan-price">${stored.planId === "yearly" ? "21.99" : "2.99"} <span>/{stored.planId === "yearly" ? "yr" : "wk"}</span></div>
+              <div className="plan-price">${stored.planId === "yearly" ? "89.99" : "2.99"} <span>/{stored.planId === "yearly" ? "yr" : "wk"}</span></div>
               {sub.status === "trial" && <div className="plan-desc">⏱ {sub.hoursLeft} hours left in your free trial</div>}
               {sub.status === "paid" && sub.cancelled && <div className="plan-desc">Access until {new Date(stored.paidEnd).toLocaleDateString()}</div>}
               {sub.status === "paid" && !sub.cancelled && <div className="plan-desc">Next charge: {new Date(stored.paidEnd).toLocaleDateString()} · Card •••• {stored.cardLast4}</div>}
