@@ -712,12 +712,12 @@ export default function FridgeCook() {
                   💳 Card
                 </button>
                 <button onClick={() => setPayMethod("apple")}
-                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <span style={{ fontSize:12, fontWeight:600, color: payMethod==="apple"?"#fff":"#333", display:"flex", alignItems:"center", gap:4 }}><svg height="14" viewBox="0 0 814 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8z"/></svg> Apple Pay</span>
+                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
+                  <span style={{ fontFamily:"-apple-system, SF Pro Display, sans-serif", fontSize:13, fontWeight:600, color: payMethod==="apple"?"#fff":"#333", letterSpacing:"-0.3px" }}> Apple Pay</span>
                 </button>
                 <button onClick={() => setPayMethod("paypal")}
                   style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="paypal"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="paypal"?"#f5f0fe":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <svg height="16" viewBox="0 0 101 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.237 2.8h-6.8c-.4 0-.8.3-.9.7L2.137 23.3c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.9-.7l.7-4.6c.1-.4.4-.7.9-.7h2.1c4.4 0 6.9-2.1 7.6-6.4.3-1.9 0-3.3-.8-4.3-.9-1.1-2.5-1.6-4.8-1.6zm.8 6.3c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.5c0-.3.3-.5.5-.5h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.9zM35.737 9.1h-3.2c-.3 0-.5.2-.5.5l-.1.8-.2-.3c-.7-1-2.2-1.3-3.7-1.3-3.5 0-6.5 2.6-7.1 6.4-.3 1.9.1 3.7 1.2 4.9.9 1.1 2.3 1.6 3.9 1.6 2.8 0 4.4-1.8 4.4-1.8l-.2.8c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.9-.7l1.7-11.2c.1-.3-.1-.6-.5-.3zm-4.4 6.2c-.3 1.8-1.7 3-3.6 3-.9 0-1.7-.3-2.1-.9-.5-.5-.6-1.3-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.6.7 1.4.6 2.2zM55.337 9.1h-3.2c-.3 0-.6.2-.8.4l-4.3 6.4-1.8-6.2c-.1-.4-.5-.6-.9-.6h-3.2c-.4 0-.6.4-.5.7l3.4 10.2-3.2 4.6c-.3.4 0 .9.5.9h3.2c.3 0 .6-.2.8-.4l10.3-15.1c.2-.3 0-.9-.3-.9z" fill="#253B80"/><path d="M67.037 2.8h-6.8c-.4 0-.8.3-.9.7L57 23.3c-.1.3.2.6.5.6h3.4c.3 0 .6-.2.6-.5l.8-4.8c.1-.4.4-.7.9-.7h2.1c4.4 0 6.9-2.1 7.6-6.4.3-1.9 0-3.3-.8-4.3-.9-1.1-2.5-1.6-4.6-1.6zm.8 6.3c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.5c0-.3.3-.5.5-.5h.5c1.2 0 2.3 0 2.9.7.3.4.3 1 .3 1.9zM90.637 9.1h-3.2c-.3 0-.5.2-.5.5l-.1.8-.2-.3c-.7-1-2.2-1.3-3.7-1.3-3.5 0-6.5 2.6-7.1 6.4-.3 1.9.1 3.7 1.2 4.9.9 1.1 2.3 1.6 3.9 1.6 2.8 0 4.4-1.8 4.4-1.8l-.2.8c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.9-.7l1.7-11.2c.1-.3-.2-.6-.5-.3zm-4.5 6.2c-.3 1.8-1.7 3-3.6 3-.9 0-1.7-.3-2.1-.9-.5-.5-.6-1.3-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.6.7 1.4.6 2.2zM95.437 3.2l-2.7 17.3c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.9-.7L99.237 3.2c.1-.3-.2-.6-.5-.6h-3c-.3 0-.5.2-.6.6z" fill="#179BD7"/></svg>
+                  <span style={{ fontSize:13, fontWeight:800, letterSpacing:"-0.5px" }}><span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span></span>
                 </button>
               </div>
 
@@ -754,11 +754,11 @@ export default function FridgeCook() {
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <svg height="48" viewBox="0 0 814 1000" fill="#000" xmlns="http://www.w3.org/2000/svg" style={{ margin:"16px auto", display:"block" }}><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8z"/></svg>
-                  <p style={{ fontSize:14, color:'#555', marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
-                  <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:10, fontSize:15, fontWeight:600, fontFamily:"DM Sans, sans-serif" }}>
-                    <svg height="18" viewBox="0 0 814 1000" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8z"/></svg>
-                    Pay with Apple Pay
+                <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
+                  <div style={{ fontSize:52, margin:"12px 0 8px" }}></div>
+                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
+                  <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontSize:15, fontWeight:600, fontFamily:"-apple-system, SF Pro Display, sans-serif" }}>
+                     Pay with Apple Pay
                   </button>
                   <p style={{ fontSize:11, color:"#aaa", marginTop:10 }}>Requires Safari on an Apple device</p>
                 </div>
@@ -766,12 +766,12 @@ export default function FridgeCook() {
 
               {payMethod === "paypal" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:32, fontWeight:800, textAlign:'center', margin:'16px 0', letterSpacing:'-1px' }}><span style={{ color:'#003087' }}>Pay</span><span style={{ color:'#009cde' }}>Pal</span></div>
-                  <p style={{ fontSize:14, color:'#555', marginBottom:20, lineHeight:1.6 }}>You'll be redirected to PayPal to complete your subscription.</p>
-                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:700, fontSize:15, display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontFamily:"DM Sans, sans-serif" }}>
-                    <span style={{ fontSize:15, fontWeight:700 }}>Pay</span><span style={{ fontSize:15, fontWeight:700, color:'#009cde' }}>Pal</span>
+                <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
+                  <div style={{ fontSize:36, fontWeight:800, margin:"16px 0 8px", letterSpacing:"-1px" }}><span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span></div>
+                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>You'll be redirected to PayPal to complete your subscription.</p>
+                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:800, fontSize:16, fontFamily:"DM Sans, sans-serif", letterSpacing:"-0.3px" }}>
+                    <span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span> — Continue
                   </button>
-                </div>
               )}
 
               {stripeError && payMethod !== "card" && <div style={{ color:"#e55", fontSize:13, textAlign:"center", marginTop:12 }}>{stripeError}</div>}
