@@ -713,7 +713,7 @@ export default function FridgeCook() {
                 </button>
                 <button onClick={() => setPayMethod("apple")}
                   style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:4 }}>
-                  <span style={{ fontSize:12, fontWeight:600, color: payMethod==="apple"?"#fff":"#333" }}>{"🍎"} Apple Pay</span>
+                  <img src="/apple.png" style={{ width:14, height:14, filter: payMethod==="apple"?"invert(1)":"invert(0)", marginRight:4 }} /><span style={{ fontSize:12, fontWeight:600, color: payMethod==="apple"?"#fff":"#333" }}>Apple Pay</span>
                 </button>
                 <button onClick={() => setPayMethod("paypal")}
                   style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="paypal"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="paypal"?"#f5f0fe":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
@@ -754,10 +754,10 @@ export default function FridgeCook() {
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:52, margin:"12px 0 8px" }}>{"🍎"}</div>
+                  <img src="/apple.png" style={{ width:52, height:52, margin:"12px auto", display:"block" }} />
                   <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
                   <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontSize:15, fontWeight:600, fontFamily:"DM Sans, sans-serif" }}>
-                    {"🍎"} Pay with Apple Pay
+                    <img src="/apple.png" style={{ width:18, height:18, filter:"invert(1)", marginRight:8 }} /> Pay with Apple Pay
                   </button>
                   <p style={{ fontSize:11, color:"#aaa", marginTop:10 }}>Requires Safari on an Apple device</p>
                 </div>
