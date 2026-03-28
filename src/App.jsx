@@ -1,11 +1,12 @@
+// @ts-nocheck
 import { useState, useRef, useEffect, useCallback } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 // Stripe — loaded via CDN in useEffect
 // Set your keys as env vars: VITE_STRIPE_PUBLISHABLE_KEY, VITE_STRIPE_WEEKLY_PRICE_ID, VITE_STRIPE_YEARLY_PRICE_ID
-const STRIPE_KEY  = typeof import.meta.env !== "undefined" ? import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY : "";
-const PRICE_WEEK  = typeof import.meta.env !== "undefined" ? import.meta.env.VITE_STRIPE_WEEKLY_PRICE_ID  : "";
-const PRICE_YEAR  = typeof import.meta.env !== "undefined" ? import.meta.env.VITE_STRIPE_YEARLY_PRICE_ID  : "";
+const STRIPE_KEY  = (import.meta.env?.VITE_STRIPE_PUBLISHABLE_KEY as string) || "";
+const PRICE_WEEK  = (import.meta.env?.VITE_STRIPE_WEEKLY_PRICE_ID  as string) || "";
+const PRICE_YEAR  = (import.meta.env?.VITE_STRIPE_YEARLY_PRICE_ID  as string) || "";
 
 // Pricing
 const PLANS = {
@@ -706,12 +707,24 @@ export default function FridgeCook() {
             <>
               {/* Payment method tabs */}
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8, marginBottom:20 }}>
-                {[["card","💳 Card"],["apple","🍎 Apple Pay"],["paypal","🅿 PayPal"]].map(([id,label]) => (
-                  <button key={id} onClick={() => setPayMethod(id)}
-                    style={{ padding:"10px 4px", border:`1.5px solid ${payMethod===id?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod===id?"#f5f0fe":"#fff", color: payMethod===id?"#7C3AED":"#555", fontSize:12, fontWeight: payMethod===id?600:400, cursor:"pointer", fontFamily:"DM Sans, sans-serif", transition:"all 0.15s" }}>
-                    {label}
-                  </button>
-                ))}
+                <button onClick={() => setPayMethod("card")}
+                  style={{ padding:"10px 4px", border:`1.5px solid ${payMethod==="card"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="card"?"#f5f0fe":"#fff", color: payMethod==="card"?"#7C3AED":"#555", fontSize:12, fontWeight: payMethod==="card"?600:400, cursor:"pointer", fontFamily:"DM Sans, sans-serif", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:5 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="22" height="16" rx="3" stroke="currentColor" strokeWidth="2"/><path d="M1 10H23" stroke="currentColor" strokeWidth="2"/></svg>
+                  Card
+                </button>
+                <button onClick={() => setPayMethod("apple")}
+                  style={{ padding:"10px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#f5f0fe":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <svg width="44" height="18" viewBox="0 0 54 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.22 4.53c.52-.63.87-1.48.77-2.35-.76.04-1.7.5-2.24 1.13-.49.56-.92 1.47-.8 2.32.84.07 1.71-.42 2.27-1.1zm.76 1.2c-1.25-.07-2.32.71-2.91.71-.6 0-1.52-.68-2.52-.66C2.2 5.8 1 6.94.5 8.47c-1.03 2.82.26 7 1.26 9.29.49 1.12 1.09 2.33 1.87 2.3.74-.03 1.03-.48 1.93-.48.9 0 1.16.48 1.95.47.81-.02 1.33-1.14 1.82-2.27.56-1.29.79-2.55.8-2.61-.02 0-1.54-.6-1.55-2.37-.02-1.49 1.21-2.2 1.27-2.24-.7-1.03-1.78-1.14-2.16-1.17zM16.5 3.26v14.55h2.26v-4.97h3.13c2.86 0 4.87-1.97 4.87-4.8 0-2.84-1.97-4.78-4.79-4.78H16.5zm2.26 1.9h2.6c1.97 0 3.09 1.05 3.09 2.9 0 1.84-1.12 2.9-3.1 2.9h-2.59V5.16zM31.52 17.94c1.42 0 2.74-.72 3.34-1.86h.05v1.73h2.09V11c0-2.1-1.68-3.45-4.26-3.45-2.4 0-4.17 1.37-4.23 3.25h2.03c.17-.9.99-1.48 2.14-1.48 1.38 0 2.16.64 2.16 1.83v.8l-2.82.17c-2.62.16-4.04 1.23-4.04 3.09 0 1.88 1.46 3.13 3.54 3.13zm.61-1.73c-1.2 0-1.97-.58-1.97-1.46 0-.91.74-1.44 2.16-1.52l2.51-.16v.82c0 1.35-1.14 2.32-2.7 2.32zM39.1 22c2.21 0 3.25-.84 4.16-3.4l3.98-11.16H45l-2.67 8.56h-.05l-2.67-8.56h-2.32l3.84 10.64-.2.64c-.35 1.1-.91 1.52-1.92 1.52-.18 0-.53-.02-.67-.04V22c.13.02.56 0 .76 0z" fill={payMethod==="apple"?"#7C3AED":"#1a1a1a"}/>
+                  </svg>
+                </button>
+                <button onClick={() => setPayMethod("paypal")}
+                  style={{ padding:"10px 4px", border:`1.5px solid ${payMethod==="paypal"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="paypal"?"#f5f0fe":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <svg width="64" height="18" viewBox="0 0 80 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.26 1.5H3.8C3.4 1.5 3.06 1.78 3 2.18L.76 16.4c-.05.3.18.57.49.57h2.67c.4 0 .74-.28.8-.68l.6-3.8c.06-.4.4-.68.8-.68h1.74c3.62 0 5.71-1.75 6.26-5.22.24-1.52.01-2.71-.68-3.54C12.67 2 11.2 1.5 9.26 1.5zm.63 5.14c-.3 1.97-1.8 1.97-3.26 1.97h-.83l.58-3.67c.03-.22.23-.38.45-.38h.38c.99 0 1.93 0 2.41.56.29.34.38.84.27 1.52zM24.1 6.58h-2.68c-.22 0-.41.16-.45.38l-.11.73-.18-.26c-.57-.82-1.83-1.1-3.09-1.1-2.89 0-5.36 2.19-5.84 5.26-.25 1.53.1 2.99.96 4.01.79.93 1.91 1.32 3.25 1.32 2.33 0 3.62-1.5 3.62-1.5l-.12.72c-.05.3.18.57.49.57h2.41c.4 0 .74-.28.8-.68l1.45-9.17c.04-.3-.2-.58-.51-.28zm-3.73 5.09c-.25 1.49-1.44 2.49-2.95 2.49-.76 0-1.36-.24-1.75-.7-.39-.46-.53-1.11-.41-1.84.23-1.48 1.44-2.51 2.93-2.51.74 0 1.34.25 1.74.71.4.47.56 1.13.44 1.85zM37.8 6.58h-2.69c-.25 0-.48.12-.62.33l-3.58 5.27-1.52-5.07c-.1-.32-.39-.53-.72-.53h-2.64c-.34 0-.58.34-.47.66l2.86 8.4-2.69 3.8c-.23.33 0 .78.4.78h2.68c.24 0 .47-.12.61-.32l8.64-12.48c.23-.33 0-.84-.26-.84z" fill="#253B80"/>
+                    <path d="M45.5 1.5h-5.46c-.4 0-.74.28-.8.68L37 16.4c-.05.3.18.57.49.57h2.86c.28 0 .52-.2.56-.48l.63-4c.06-.4.4-.68.8-.68h1.74c3.62 0 5.71-1.75 6.26-5.22.24-1.52.01-2.71-.68-3.54C48.9 2 47.44 1.5 45.5 1.5zm.63 5.14c-.3 1.97-1.8 1.97-3.26 1.97h-.82l.58-3.67c.03-.22.23-.38.45-.38h.38c.99 0 1.93 0 2.41.56.29.34.37.84.26 1.52zM60.34 6.58h-2.67c-.22 0-.42.16-.45.38l-.12.73-.18-.26c-.57-.82-1.83-1.1-3.09-1.1-2.89 0-5.36 2.19-5.84 5.26-.25 1.53.1 2.99.96 4.01.79.93 1.92 1.32 3.25 1.32 2.33 0 3.62-1.5 3.62-1.5l-.12.72c-.05.3.18.57.49.57h2.41c.4 0 .74-.28.8-.68l1.44-9.17c.05-.3-.19-.58-.5-.28zm-3.72 5.09c-.25 1.49-1.44 2.49-2.95 2.49-.76 0-1.36-.24-1.75-.7-.39-.46-.54-1.11-.41-1.84.23-1.48 1.44-2.51 2.92-2.51.74 0 1.35.25 1.74.71.41.47.57 1.13.45 1.85zM63.07 1.84l-2.29 14.57c-.05.3.18.57.49.57h2.31c.4 0 .74-.28.8-.68L66.65 2.1c.05-.3-.18-.57-.49-.57h-2.6c-.23 0-.42.14-.49.31z" fill="#179BD7"/>
+                  </svg>
+                </button>
               </div>
 
               {payMethod === "card" && (
@@ -747,10 +760,10 @@ export default function FridgeCook() {
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:48, marginBottom:12 }}>🍎</div>
-                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
-                  <button className="btn-primary" onClick={submitApplePay} style={{ background:"#000" }}>
-                     Pay with Apple Pay
+                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6, marginTop:8 }}>Pay with Face ID or Touch ID. No card details needed.</p>
+                  <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}>
+                    <svg width="20" height="20" viewBox="0 0 814 1000" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7c-72.9-134.4-174.1-386.1-174.1-600.9 0-233.1 141.2-350.8 280.4-350.8 98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8z"/></svg>
+                    Pay with Apple Pay
                   </button>
                   <p style={{ fontSize:11, color:"#aaa", marginTop:10 }}>Requires Safari on an Apple device</p>
                 </div>
@@ -758,10 +771,9 @@ export default function FridgeCook() {
 
               {payMethod === "paypal" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:48, marginBottom:12 }}>🅿️</div>
-                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>You'll be redirected to PayPal to authorise the subscription.</p>
-                  <button className="btn-primary" onClick={submitPayPal} style={{ background:"#003087" }}>
-                    Continue with PayPal
+                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6, marginTop:8 }}>You'll be redirected to PayPal to complete your subscription.</p>
+                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:700, fontSize:15, display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontFamily:"DM Sans, sans-serif" }}>
+                    <svg width="80" height="20" viewBox="0 0 80 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.26 1.5H3.8C3.4 1.5 3.06 1.78 3 2.18L.76 16.4c-.05.3.18.57.49.57h2.67c.4 0 .74-.28.8-.68l.6-3.8c.06-.4.4-.68.8-.68h1.74c3.62 0 5.71-1.75 6.26-5.22.24-1.52.01-2.71-.68-3.54C12.67 2 11.2 1.5 9.26 1.5zm.63 5.14c-.3 1.97-1.8 1.97-3.26 1.97h-.83l.58-3.67c.03-.22.23-.38.45-.38h.38c.99 0 1.93 0 2.41.56.29.34.38.84.27 1.52zM24.1 6.58h-2.68c-.22 0-.41.16-.45.38l-.11.73-.18-.26c-.57-.82-1.83-1.1-3.09-1.1-2.89 0-5.36 2.19-5.84 5.26-.25 1.53.1 2.99.96 4.01.79.93 1.91 1.32 3.25 1.32 2.33 0 3.62-1.5 3.62-1.5l-.12.72c-.05.3.18.57.49.57h2.41c.4 0 .74-.28.8-.68l1.45-9.17c.04-.3-.2-.58-.51-.28zm-3.73 5.09c-.25 1.49-1.44 2.49-2.95 2.49-.76 0-1.36-.24-1.75-.7-.39-.46-.53-1.11-.41-1.84.23-1.48 1.44-2.51 2.93-2.51.74 0 1.34.25 1.74.71.4.47.56 1.13.44 1.85zM37.8 6.58h-2.69c-.25 0-.48.12-.62.33l-3.58 5.27-1.52-5.07c-.1-.32-.39-.53-.72-.53h-2.64c-.34 0-.58.34-.47.66l2.86 8.4-2.69 3.8c-.23.33 0 .78.4.78h2.68c.24 0 .47-.12.61-.32l8.64-12.48c.23-.33 0-.84-.26-.84z" fill="#253B80"/><path d="M45.5 1.5h-5.46c-.4 0-.74.28-.8.68L37 16.4c-.05.3.18.57.49.57h2.86c.28 0 .52-.2.56-.48l.63-4c.06-.4.4-.68.8-.68h1.74c3.62 0 5.71-1.75 6.26-5.22.24-1.52.01-2.71-.68-3.54C48.9 2 47.44 1.5 45.5 1.5zm.63 5.14c-.3 1.97-1.8 1.97-3.26 1.97h-.82l.58-3.67c.03-.22.23-.38.45-.38h.38c.99 0 1.93 0 2.41.56.29.34.37.84.26 1.52zM60.34 6.58h-2.67c-.22 0-.42.16-.45.38l-.12.73-.18-.26c-.57-.82-1.83-1.1-3.09-1.1-2.89 0-5.36 2.19-5.84 5.26-.25 1.53.1 2.99.96 4.01.79.93 1.92 1.32 3.25 1.32 2.33 0 3.62-1.5 3.62-1.5l-.12.72c-.05.3.18.57.49.57h2.41c.4 0 .74-.28.8-.68l1.44-9.17c.05-.3-.19-.58-.5-.28zm-3.72 5.09c-.25 1.49-1.44 2.49-2.95 2.49-.76 0-1.36-.24-1.75-.7-.39-.46-.54-1.11-.41-1.84.23-1.48 1.44-2.51 2.92-2.51.74 0 1.35.25 1.74.71.41.47.57 1.13.45 1.85zM63.07 1.84l-2.29 14.57c-.05.3.18.57.49.57h2.31c.4 0 .74-.28.8-.68L66.65 2.1c.05-.3-.18-.57-.49-.57h-2.6c-.23 0-.42.14-.49.31z" fill="#179BD7"/></svg>
                   </button>
                 </div>
               )}
