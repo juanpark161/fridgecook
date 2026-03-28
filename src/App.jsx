@@ -709,15 +709,15 @@ export default function FridgeCook() {
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8, marginBottom:20 }}>
                 <button onClick={() => setPayMethod("card")}
                   style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="card"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="card"?"#f5f0fe":"#fff", color: payMethod==="card"?"#7C3AED":"#555", fontSize:12, fontWeight: payMethod==="card"?600:400, cursor:"pointer", fontFamily:"DM Sans, sans-serif", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:5 }}>
-                  💳 Card
+                  {"💳 Card"}
                 </button>
                 <button onClick={() => setPayMethod("apple")}
-                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
-                  <span style={{ fontFamily:"-apple-system, SF Pro Display, sans-serif", fontSize:13, fontWeight:600, color: payMethod==="apple"?"#fff":"#333", letterSpacing:"-0.3px" }}> Apple Pay</span>
+                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:4 }}>
+                  <span style={{ fontSize:12, fontWeight:600, color: payMethod==="apple"?"#fff":"#333" }}>{"🍎"} Apple Pay</span>
                 </button>
                 <button onClick={() => setPayMethod("paypal")}
                   style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="paypal"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="paypal"?"#f5f0fe":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <span style={{ fontSize:13, fontWeight:800, letterSpacing:"-0.5px" }}><span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span></span>
+                  <span style={{ fontSize:13, fontWeight:800 }}><span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span></span>
                 </button>
               </div>
 
@@ -754,11 +754,10 @@ export default function FridgeCook() {
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:52, margin:"12px 0 8px" }}></div>
+                  <div style={{ fontSize:52, margin:"12px 0 8px" }}>{"🍎"}</div>
                   <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
-                  <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:8, fontSize:15, fontWeight:600, fontFamily:"-apple-system, SF Pro Display, sans-serif" }}>
-                     Pay with Apple Pay
+                  <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontSize:15, fontWeight:600, fontFamily:"DM Sans, sans-serif" }}>
+                    {"🍎"} Pay with Apple Pay
                   </button>
                   <p style={{ fontSize:11, color:"#aaa", marginTop:10 }}>Requires Safari on an Apple device</p>
                 </div>
@@ -766,12 +765,14 @@ export default function FridgeCook() {
 
               {payMethod === "paypal" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:36, fontWeight:800, margin:"16px 0 8px", letterSpacing:"-1px" }}><span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span></div>
-                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>You'll be redirected to PayPal to complete your subscription.</p>
-                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:800, fontSize:16, fontFamily:"DM Sans, sans-serif", letterSpacing:"-0.3px" }}>
-                    <span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span> — Continue
+                  <div style={{ fontSize:36, fontWeight:800, margin:"16px 0 8px", letterSpacing:"-1px" }}>
+                    <span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span>
+                  </div>
+                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>You will be redirected to PayPal to complete your subscription.</p>
+                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:800, fontSize:16, fontFamily:"DM Sans, sans-serif" }}>
+                    Continue with PayPal
                   </button>
+                </div>
               )}
 
               {stripeError && payMethod !== "card" && <div style={{ color:"#e55", fontSize:13, textAlign:"center", marginTop:12 }}>{stripeError}</div>}
