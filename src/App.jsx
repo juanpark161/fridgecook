@@ -4,9 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 
 // Stripe — loaded via CDN in useEffect
 // Set your keys as env vars: VITE_STRIPE_PUBLISHABLE_KEY, VITE_STRIPE_WEEKLY_PRICE_ID, VITE_STRIPE_YEARLY_PRICE_ID
-const STRIPE_KEY  = (import.meta.env?.VITE_STRIPE_PUBLISHABLE_KEY as string) || "";
-const PRICE_WEEK  = (import.meta.env?.VITE_STRIPE_WEEKLY_PRICE_ID  as string) || "";
-const PRICE_YEAR  = (import.meta.env?.VITE_STRIPE_YEARLY_PRICE_ID  as string) || "";
+const STRIPE_KEY  = import.meta.env?.VITE_STRIPE_PUBLISHABLE_KEY || "";
+const PRICE_WEEK  = import.meta.env?.VITE_STRIPE_WEEKLY_PRICE_ID  || "";
+const PRICE_YEAR  = import.meta.env?.VITE_STRIPE_YEARLY_PRICE_ID  || "";
 
 // Pricing
 const PLANS = {
@@ -712,8 +712,8 @@ export default function FridgeCook() {
                   💳 Card
                 </button>
                 <button onClick={() => setPayMethod("apple")}
-                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 814 1000'%3E%3Cpath d='M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8zm-71.7-172c-41.9 52.3-101.9 92.3-161.9 87.3-7.4-59.5 21.9-122.8 57.2-161.8 41.9-49.3 108.2-87.3 163.7-89.3 6.4 61.5-17.7 122.8-59 163.8z' fill='currentColor'/%3E%3C/svg%3E" style={{ width:16, height:16, filter: payMethod==="apple"?"invert(1)":"invert(0)", marginRight:5 }} />
+                  style={{ padding:"12px 4px", border:`1.5px solid ${payMethod==="apple"?"#7C3AED":"#e8e4f5"}`, borderRadius:10, background: payMethod==="apple"?"#000":"#fff", cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:5 }}>
+                  <span style={{ fontSize:14 }}></span>
                   <span style={{ fontSize:12, fontWeight:600, color: payMethod==="apple"?"#fff":"#333" }}>Apple Pay</span>
                 </button>
                 <button onClick={() => setPayMethod("paypal")}
@@ -755,7 +755,7 @@ export default function FridgeCook() {
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:8, margin:'16px 0' }}><img src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 814 1000'%3E%3Cpath d='M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8zm-71.7-172c-41.9 52.3-101.9 92.3-161.9 87.3-7.4-59.5 21.9-122.8 57.2-161.8 41.9-49.3 108.2-87.3 163.7-89.3 6.4 61.5-17.7 122.8-59 163.8z' fill='currentColor'/%3E%3C/svg%3E' style={{ width:32, height:32 }} /></div>
+                  <div style={{ fontSize:40, textAlign:'center', margin:'16px 0' }}></div>
                   <p style={{ fontSize:14, color:'#555', marginBottom:20, lineHeight:1.6 }}>Pay with Face ID or Touch ID. No card details needed.</p>
                   <button onClick={submitApplePay} style={{ background:"#000", color:"#fff", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:10, fontSize:15, fontWeight:600, fontFamily:"DM Sans, sans-serif" }}>
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 814 1000'%3E%3Cpath d='M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-140.7C108.2 633.6 7 381.9 7 167.1 7-66 148.2-51.8 280.4 51.2c98.7 0 162.3 57.4 220.3 57.4 55.6 0 127.4-61 236.3-61 38.2 0 154.8 3.2 238.2 126.8zm-71.7-172c-41.9 52.3-101.9 92.3-161.9 87.3-7.4-59.5 21.9-122.8 57.2-161.8 41.9-49.3 108.2-87.3 163.7-89.3 6.4 61.5-17.7 122.8-59 163.8z' fill='currentColor'/%3E%3C/svg%3E" style={{ width:18, height:18, filter:"invert(1)" }} />
