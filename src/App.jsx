@@ -269,14 +269,18 @@ export default function FridgeCook() {
         }),
       });
       const data = await res.json();
+      console.log("API response:", JSON.stringify(data).slice(0, 200));
+      if (data.error) { alert("API Error: " + data.error.message); return; }
       const raw = data.content?.[0]?.text || "";
+      if (!raw) { alert("No response from AI. Check your API key in Vercel."); return; }
       setSuggestions(JSON.parse(raw.replace(/```json|```/g, "").trim()));
       setScreen("suggestions"); setTab("meals");
     } catch (err) {
       if (err.name === "AbortError") {
         alert("Scanning timed out. Please try again.");
       } else {
-        alert("Couldn't analyze the image. Please try again.");
+        console.error("Scan error:", err);
+        alert("Error: " + (err.message || "Couldn't analyze the image. Please try again."));
       }
     } finally {
       clearTimeout(timeoutId);
@@ -580,7 +584,7 @@ export default function FridgeCook() {
   }
 
   function PaymentSheet() {
-    const [payMethod, setPayMethod] = useState("card"); // "card" | "apple" | "paypal"
+    const [payMethod, setPayMethod] = useState("apple");
     const [card, setCard]           = useState({ name: "", number: "", expiry: "", cvv: "" });
     const [processing, setProcessing] = useState(false);
     const [stripeError, setStripeError] = useState("");
@@ -722,36 +726,7 @@ export default function FridgeCook() {
                 </button>
               </div>
 
-              {payMethod === "card" && (
-                <>
-                  <div className="pay-form">
-                    <div className="pay-field">
-                      <label>Cardholder Name</label>
-                      <input placeholder="Jane Smith" value={card.name} onChange={e => { setErrors({}); fmt("name", e.target.value); }} style={{ borderColor: errors.name?"#e55":"" }} />
-                    </div>
-                    {STRIPE_KEY ? (
-                      <div className="pay-field">
-                        <label>Card Details</label>
-                        <div id="stripe-card-element" style={{ padding:"13px 14px", border:`1.5px solid ${stripeError?"#e55":"#e8e4f5"}`, borderRadius:10, background:"#fff", minHeight:46 }} />
-                        {stripeError && <div style={{ color:"#e55", fontSize:12, marginTop:4 }}>{stripeError}</div>}
-                      </div>
-                    ) : (
-                      <>
-                        <div className="pay-field">
-                          <label>Card Number</label>
-                          <input placeholder="1234 5678 9012 3456" value={card.number} onChange={e => fmt("number", e.target.value)} inputMode="numeric" style={{ borderColor: errors.number?"#e55":"" }} />
-                        </div>
-                        <div className="pay-row">
-                          <div className="pay-field"><label>Expiry</label><input placeholder="MM/YY" value={card.expiry} onChange={e => fmt("expiry", e.target.value)} inputMode="numeric" style={{ borderColor: errors.expiry?"#e55":"" }} /></div>
-                          <div className="pay-field"><label>CVV</label><input placeholder="123" value={card.cvv} onChange={e => fmt("cvv", e.target.value)} inputMode="numeric" style={{ borderColor: errors.cvv?"#e55":"" }} /></div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="pay-security">🔒 Secured by Stripe</div>
-                  <button className="btn-primary" onClick={submitCard}>Start Free Trial</button>
-                </>
-              )}
+
 
               {payMethod === "apple" && (
                 <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
@@ -764,17 +739,7 @@ export default function FridgeCook() {
                 </div>
               )}
 
-              {payMethod === "paypal" && (
-                <div style={{ textAlign:"center", padding:"12px 0 8px" }}>
-                  <div style={{ fontSize:36, fontWeight:800, margin:"16px 0 8px", letterSpacing:"-1px" }}>
-                    <span style={{ color:"#253B80" }}>Pay</span><span style={{ color:"#169BD7" }}>Pal</span>
-                  </div>
-                  <p style={{ fontSize:14, color:"#555", marginBottom:20, lineHeight:1.6 }}>You will be redirected to PayPal to complete your subscription.</p>
-                  <button onClick={submitPayPal} style={{ background:"#FFC439", color:"#003087", border:"none", width:"100%", padding:"14px", borderRadius:12, cursor:"pointer", fontWeight:800, fontSize:16, fontFamily:"DM Sans, sans-serif" }}>
-                    Continue with PayPal
-                  </button>
-                </div>
-              )}
+
 
               {stripeError && payMethod !== "card" && <div style={{ color:"#e55", fontSize:13, textAlign:"center", marginTop:12 }}>{stripeError}</div>}
               <div style={{ fontSize:12, color:"#bbb", textAlign:"center", marginTop:12 }}>You won't be charged for 24 hours</div>
